@@ -87,10 +87,14 @@
 
                                         <span>(<?php echo $total_rate ?>)</span>
                                     </span>
-                                    <a href="index.php?page=product_detail&amp;product_id=22">
+                                    <a href="index.php?page=product_detail&amp;product_id=<?= $product['product_id'] ?>">
                                         <div class="product__price align-center">
-                                            <del class="product__price--old h5">3,500,000 ₫</del>
-                                            <span class="product__price--new h4">3,325,000 ₫</span>
+                                            <?php if (!empty($product['product_sale'])) { ?>
+                                                <del class="product__price--old h5"><?= number_format($product['product_price']) ?> ₫</del>
+                                                <span class="product__price--new h4"><?= number_format($product['product_price'] - ($product['product_price'] * $product['product_sale'] / 100)) ?> ₫</span>
+                                            <?php } else { ?>
+                                                <span class="product__price--new h4"><?= number_format($product['product_price']) ?> ₫</span>
+                                            <?php } ?>
                                         </div>
                                     </a>
                                 </div>

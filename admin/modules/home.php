@@ -13,7 +13,9 @@ $sql_sales = "SELECT * FROM orders WHERE order_date BETWEEN '$subdays' AND '$now
 $query_sales = mysqli_query($mysqli, $sql_sales);
 $sales = 0;
 while ($order = mysqli_fetch_array($query_sales)) {
-    $sales += $order['total_amount'];
+    if ($order['order_status'] == 3 || $order['order_status'] == 5) {
+        $sales += $order['total_amount'];
+    }
 }
 
 $query_product = mysqli_query($mysqli, "SELECT * FROM product WHERE product_status = 1 ");

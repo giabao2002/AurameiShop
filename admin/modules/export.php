@@ -19,7 +19,7 @@ $sheet = $spreadsheet->getActiveSheet();
 // Đặt tiêu đề cho các cột
 $sheet->setCellValue('A1', 'Ngày');
 $sheet->setCellValue('B1', 'Số đơn');
-$sheet->setCellValue('C1', 'Số lượng');
+$sheet->setCellValue('C1', 'Số sản phẩm');
 $sheet->setCellValue('D1', 'Doanh thu');
 
 // Xác định ngày bắt đầu dựa trên thời gian được chọn

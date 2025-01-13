@@ -101,7 +101,15 @@
             element: 'barChart',
             xkey: 'name',
             ykeys: ['quantity'],
-            labels: ['Số lượng']
+            labels: ['Số lượng'],
+            barRatio: 0.4,
+            xLabelAngle: 35,
+            hideHover: false,
+            resize: true,
+            gridTextSize: 10,
+            barColors: ['#0d6efd'],
+            parseTime: false,
+            gridTextFamily: 'Arial'
         });
 
         function thongke() {
@@ -121,7 +129,13 @@
                 method: "POST",
                 dataType: "JSON",
                 success: function(data) {
-                    barChart.setData(data);
+                    var processedData = data.map(function(item) {
+                        return {
+                            name: item.name.length > 30 ? item.name.substring(0, 30) + '...' : item.name,
+                            quantity: item.quantity
+                        };
+                    });
+                    barChart.setData(processedData);
                 }
             });
         }

@@ -13,7 +13,6 @@ if (isset($_GET['data'])) {
     $data = $_GET['data'];
     $order_codes = json_decode($data);
 }
-
 if (isset($_GET['confirm']) && $_GET['confirm'] == 1) {
     if ($order_codes) {
         foreach ($order_codes as $code) {
@@ -108,11 +107,27 @@ if (isset($_GET['confirm']) && $_GET['confirm'] == 1) {
         header('Location: ../../index.php?action=order&query=order_detail_online&order_code=' . $_GET['order_code'] . '&message=success');
     }
 }
-
 if (isset($_GET['rollback']) && $_GET['rollback'] == 1) {
-    header('Location: ../../index.php?action=order&query=order_detail_online&order_code=' . $_GET['order_code'] . '&message=info');
-}
+    $code = $_GET['order_code'];
+    $sql_order_get = "SELECT * FROM orders WHERE order_code = $code LIMIT 1";
+    $query_order_get = mysqli_query($mysqli, $sql_order_get);
+    $order = mysqli_fetch_array($query_order_get);
+    
+    $sql_order_return = "UPDATE orders SET order_status = 4 WHERE order_code = $code";
+    mysqli_query($mysqli, $sql_order_return);
 
+    $sql_order_detail = "SELECT * FROM order_detail WHERE order_code = $code";
+    $query_order_detail = mysqli_query($mysqli, $sql_order_detail);
+    
+    while ($item = mysqli_fetch_array($query_order_detail)) {
+        $product_id = $item['product_id'];
+        $quantity = $item['product_quantity'];
+        
+        mysqli_query($mysqli, "UPDATE product SET product_quantity = product_quantity + $quantity WHERE product_id = $product_id");
+    }
+
+    header('Location: ../../index.php?action=order&query=order_detail_online&order_code=' . $code . '&message=success');
+}
 if (isset($_GET['cancel']) && $_GET['cancel'] == 1) {
     foreach ($order_codes as $code) {
         $sql_get_order = "SELECT * FROM orders WHERE order_code = $code LIMIT 1";
@@ -136,7 +151,6 @@ if (isset($_GET['cancel']) && $_GET['cancel'] == 1) {
     }
     header('Location: ../../index.php?action=order&query=order_list&message=success');
 }
-
 if (isset($_SESSION['order']) && isset($_GET['delete'])) {
     $product_id = $_GET['delete'];
     foreach ($_SESSION['order'] as $order_item) {
@@ -183,7 +197,6 @@ if (isset($_POST['addtoorder'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER'] . '&message=error');
     }
 }
-
 if (isset($_POST['order_add'])) {
     $account_id = $_SESSION['account_id_admin'];
     $order_code = rand(0, 9999);
@@ -265,7 +278,6 @@ if (isset($_POST['order_add'])) {
         header('Location:../../index.php?page=404');
     }
 }
-
 if (isset($_GET['reverse']) && $_GET['reverse'] == 1) {
     foreach ($order_codes as $code) {
         if (isset($_GET['payment']) && $_GET['payment'] = 'momo') {
