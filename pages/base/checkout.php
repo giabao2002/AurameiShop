@@ -164,7 +164,6 @@ if (isset($_SESSION['account_id'])) {
                                 <span class="d-block">Thanh toán chuyển khoản MOMO</span>
                             </label>
                         </div>
-                        
                         <div class="payment__item d-flex align-center">
                             <input class="payment__radio" type="radio" name="order_type" id="payment_vnp" value="4" />
                             <img class="payment__icon" src="./assets/images/payment/vnpay.png" alt="QR CODE" style="width: 62px;">
@@ -173,8 +172,6 @@ if (isset($_SESSION['account_id'])) {
                                 <span class="d-block">Thanh toán chuyển khoản VNPAY</span>
                             </label>
                         </div>
-                        
-                        
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 $vnp_TmnCode = "9AY56E81";
 $vnp_HashSecret = "LIZINJXSQTETNDOYNYMCNHVNQPGUWPRL";
 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-$vnp_Returnurl = "http://auramei_shop.test/index.php?page=thankiu";
+$vnp_Returnurl = "http://aurameishop.test/index.php?page=thankiu";
 $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
 $apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 $startTime = date("YmdHis");

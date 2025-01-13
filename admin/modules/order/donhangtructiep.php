@@ -27,11 +27,11 @@ $query_order_list = mysqli_query($mysqli, $sql_order_list);
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div class="main-pane-top d-flex justify-center align-center">
+                <div class="main-pane-top d-flex align-center" style="padding-inline: 20px;">
                     <div class="input__search p-relative">
-                        <form class="search-form" action="#">
+                        <form class="search-form" action="?action=order&query=order_search" method="POST">
                             <i class="icon-search p-absolute"></i>
-                            <input type="search" class="form-control" placeholder="Tìm kiếm theo..." title="Search here">
+                            <input type="search" name="order_search" class="form-control" placeholder="Tìm kiếm theo..." title="Search here">
                         </form>
                     </div>
                 </div>
@@ -41,9 +41,9 @@ $query_order_list = mysqli_query($mysqli, $sql_order_list);
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>
+                                <!-- <th>
                                     <input type="checkbox" id="checkAll">
-                                </th>
+                                </th> -->
                                 <th>Mã đơn hàng</th>
                                 <th>Thời gian</th>
                                 <th>Nhân viên lên đơn</th>
@@ -65,9 +65,9 @@ $query_order_list = mysqli_query($mysqli, $sql_order_list);
                                             </div>
                                         </a>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <input type="checkbox" class="checkbox" onclick="testChecked(); getCheckedCheckboxes();" id="<?php echo $row['order_code'] ?>">
-                                    </td>
+                                    </td> -->
                                     <td><?php echo $row['order_code'] ?></td>
                                     <td><?php echo date('d/m/Y H:i:s', strtotime($row['order_date'])); ?></td>
                                     <td><?php echo $row['account_name'] ?></td>
@@ -139,13 +139,13 @@ $query_order_list = mysqli_query($mysqli, $sql_order_list);
         </div>
     </div>
 </div>
-<div class="dialog__control">
+<!-- <div class="dialog__control">
     <div class="control__box">
         <a href="modules/order/xuly.php?confirm=1" class="button__control" id="btnConfirm">Duyệt đơn hàng</a>
         <a href="modules/order/xuly.php?cancel=1" class="button__control" id="btnCancel">Hủy đơn hàng</a>
     </div>
-</div>
-<script>
+</div> -->
+<!-- <script>
     var btnConfirm = document.getElementById("btnConfirm");
     var btnCancel = document.getElementById("btnCancel");
     var checkAll = document.getElementById("checkAll");
@@ -190,7 +190,7 @@ $query_order_list = mysqli_query($mysqli, $sql_order_list);
         btnConfirm.href = "modules/order/xuly.php?confirm=1&data=" + JSON.stringify(checkedIds);
         btnCancel.href = "modules/order/xuly.php?cancel=1&data=" + JSON.stringify(checkedIds);
     }
-</script>
+</script> -->
 
 <script>
     function showSuccessToast() {

@@ -35,7 +35,7 @@
     
     // Lưu file Excel
     $writer = new Xlsx($spreadsheet);
-    $fileName = 'product-data_' . date('d/m/Y') . '.xlsx';
+    $fileName = 'product-data_' . date('d-m-Y') . '.xlsx';
     $writer->save($fileName);
     
     // Đặt header cho việc tải xuống file

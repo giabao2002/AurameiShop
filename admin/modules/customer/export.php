@@ -40,14 +40,13 @@ if (mysqli_num_rows($query_product) > 0) {
 
 // Lưu file Excel
 $writer = new Xlsx($spreadsheet);
-$fileName = 'customer-data_' . date('d/m/Y') . '.xlsx';
+$fileName = 'customer-data_' . date('d-m-Y') . '.xlsx';
 $writer->save($fileName);
 
 // Đặt header cho việc tải xuống file
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="' . $fileName . '"');
 header('Cache-Control: max-age=0');
-header('index.php?action=product&query=product_list&message=success');
 
 // Đọc dữ liệu từ file và ghi vào output buffer
 $writer->save('php://output');

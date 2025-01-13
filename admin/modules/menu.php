@@ -31,7 +31,7 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item <?php if ($query === 'order_live') { echo "active"; } ?>"> <a class="nav-link" href="index.php?action=order&query=order_live">Đơn tại cửa hàng</a></li>
                     <li class="nav-item <?php if ($query === 'order_list') { echo "active"; } ?>"> <a class="nav-link" href="index.php?action=order&query=order_list">Đơn trực tuyến</a></li>
-                    <li class="nav-item <?php if ($query === 'order_payment') { echo "active"; } ?>"> <a class="nav-link" href="index.php?action=order&query=order_payment">Lịch sử thanh toán</a></li>
+                    <!-- <li class="nav-item <?php if ($query === 'order_payment') { echo "active"; } ?>"> <a class="nav-link" href="index.php?action=order&query=order_payment">Lịch sử thanh toán</a></li> -->
                 </ul>
             </div>
         </li>

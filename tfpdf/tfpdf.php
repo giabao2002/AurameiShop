@@ -480,9 +480,6 @@ function AddFont($family, $style='', $file='', $uni=false)
 	if(isset($this->fonts[$fontkey]))
 		return;
 	if ($uni) {
-		if (!defined('_SYSTEM_TTFONTS')) {
-			define('_SYSTEM_TTFONTS', '/path/to/your/fonts/');
-		}
 		if (defined("_SYSTEM_TTFONTS") && file_exists(_SYSTEM_TTFONTS.$file )) { $ttffilename = _SYSTEM_TTFONTS.$file ; }
 		else { $ttffilename = $this->fontpath.'unifont/'.$file ; }
 		$unifilename = $this->fontpath.'unifont/'.strtolower(substr($file ,0,(strpos($file ,'.'))));
@@ -494,7 +491,7 @@ function AddFont($family, $style='', $file='', $uni=false)
 		}
 		if (!isset($type) ||  !isset($name) || $originalsize != $ttfstat['size']) {
 			$ttffile = $ttffilename;
-			// require_once($this->fontpath.'unifont/ttfonts.php');
+			require_once($this->fontpath.'unifont/ttfonts.php');
 			$ttf = new TTFontFile();
 			$ttf->getMetrics($ttffile);
 			$cw = $ttf->charWidths;
