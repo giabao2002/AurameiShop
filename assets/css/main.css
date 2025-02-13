@@ -883,7 +883,8 @@ h6,
   display: inline-block;
 }
 
-.footer__logo, .header__logo {
+.footer__logo,
+.header__logo {
   width: 80px;
   height: 80px;
   margin-bottom: 20px;
@@ -891,14 +892,16 @@ h6,
   overflow: hidden;
 }
 
-.footer__logo img, .header__logo img {
+.footer__logo img,
+.header__logo img {
   width: 100%;
   /* display: block; */
   transition: all 0.5s ease;
   transform: scale(2);
 }
 
-.footer__logo img:hover, .header__logo img:hover {
+.footer__logo img:hover,
+.header__logo img:hover {
   transform: scale(1.1);
   transition: all 0.5s ease;
 }

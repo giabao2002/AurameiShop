@@ -7,36 +7,157 @@ $query_order_detail_list = mysqli_query($mysqli, $sql_order_detail_list);
 $sql_order = "SELECT * FROM orders JOIN delivery ON orders.delivery_id = delivery.delivery_id WHERE orders.order_code = '" . $order_code . "' ORDER BY orders.order_id DESC";
 $query_order = mysqli_query($mysqli, $sql_order);
 $order = mysqli_fetch_array(mysqli_query($mysqli, "SELECT * FROM orders WHERE  order_code = '" . $order_code . "'"));
+
+// Thêm đoạn code này sau phần khai báo biến
+$message = '';
+if (isset($_GET['message'])) {
+    switch ($_GET['message']) {
+        case 'success':
+            $message = '<div class="alert alert-success">Cập nhật thông tin đơn hàng thành công!</div>';
+            break;
+        case 'error':
+            $message = '<div class="alert alert-danger">Có lỗi xảy ra, vui lòng thử lại!</div>';
+            break;
+        case 'invalid_status':
+            $message = '<div class="alert alert-warning">Không thể cập nhật thông tin đơn hàng này!</div>';
+            break;
+    }
+}
 ?>
+<style>
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+
+    .alert-warning {
+        color: #856404;
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+    }
+
+    .btn-update {
+        background-color: #fff;
+        color: #dc3545;
+        border: 1px solid #dc3545;
+        padding: 8px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-update:hover {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .btn-update:active {
+        transform: scale(0.95);
+    }
+
+    .fs-icon {
+        color: #666;
+        margin-left: 10px;
+        font-size: 14px;
+        display: none; /* Ẩn mặc định */
+    }
+
+    /* Chỉ hiển thị icon khi input không readonly */
+    .info__item input:not([readonly]) + .fs-icon {
+        display: inline-block;
+    }
+
+    .info__item {
+        position: relative;
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const alert = document.querySelector('.alert');
+        if (alert) {
+            setTimeout(function() {
+                alert.style.transition = 'opacity 0.5s ease';
+                alert.style.opacity = '0';
+                setTimeout(function() {
+                    alert.remove();
+                }, 500);
+            }, 2000);
+        }
+    });
+</script>
 <section class="checkout pd-section">
     <div class="container">
         <div class="row">
             <div class="col" style="--w-md:8;">
                 <h2 class="checkout__title h4 d-flex align-center space-between">Thông tin khách hàng</h2>
+                <?php if ($message != '') echo $message; ?>
                 <div class="checkout__infomation">
                     <?php
                     while ($account = mysqli_fetch_array($query_order)) {
                     ?>
-                        <div class="info__item d-flex">
-                            <label class="info__title" for="delivery_name">Tên khách hàng:</label>
-                            <input type="text" class="info__input flex-1" name="delivery_name" value="<?php echo $account['delivery_name'] ?>" readonly></input>
-                        </div>
-                        <div class="info__item d-flex">
-                            <label class="info__title" for="">Số điện thoại:</label>
-                            <input type="text" class="info__input flex-1" name="delivery_phone" value="<?php echo $account['delivery_phone'] ?>" readonly></input>
-                        </div>
-                        <div class="info__item d-flex">
-                            <label class="info__title" for="">Địa chỉ:</label>
-                            <input type="text" class="info__input flex-1" name="delivery_address" value="<?php echo $account['delivery_address'] ?>" readonly></input>
-                        </div>
-                        <div class="info__item d-flex">
-                            <label class="info__title" for="">Ghi chú</label>
-                            <input type="text" class="info__input flex-1" name="delivery_note" value="<?php echo $account['delivery_note'] ?>" readonly></input>
-                        </div>
-                        <div class="info__item d-flex">
-                            <label class="info__title" for="order_type">Phương thức:</label>
-                            <input type="text" class="info__input flex-1" name="order_type" value="<?php echo format_order_type($account['order_type']) ?>" readonly></input>
-                        </div>
+                        <form action="pages/handle/order.php" method="POST">
+                            <input type="hidden" name="order_code" value="<?php echo $order_code ?>">
+                            <div class="info__item d-flex">
+                                <label class="info__title" for="delivery_name">Tên khách hàng:</label>
+                                <input type="text" class="info__input flex-1" name="delivery_name"
+                                    value="<?php echo $account['delivery_name'] ?>"
+                                    <?php echo $order['order_status'] == 0 ? '' : 'readonly' ?> required>
+                                <?php if ($order['order_status'] == 0) { ?>
+                                    <i class="fas fa-pencil-alt fs-icon"></i>
+                                <?php } ?>
+                            </div>
+                            <div class="info__item d-flex">
+                                <label class="info__title" for="">Số điện thoại:</label>
+                                <input type="text" class="info__input flex-1" name="delivery_phone"
+                                    value="<?php echo $account['delivery_phone'] ?>"
+                                    <?php echo $order['order_status'] == 0 ? '' : 'readonly' ?> required>
+                                <?php if ($order['order_status'] == 0) { ?>
+                                    <i class="fas fa-pencil-alt fs-icon"></i>
+                                <?php } ?>
+                            </div>
+                            <div class="info__item d-flex">
+                                <label class="info__title" for="">Địa chỉ:</label>
+                                <input type="text" class="info__input flex-1" name="delivery_address" placeholder="Nhập địa chỉ giao hàng"
+                                    value="<?php echo $account['delivery_address'] ?>"
+                                    <?php echo $order['order_status'] == 0 ? '' : 'readonly' ?> required>
+                                <?php if ($order['order_status'] == 0) { ?>
+                                    <i class="fas fa-pencil-alt fs-icon"></i>
+                                <?php } ?>
+                            </div>
+                            <div class="info__item d-flex">
+                                <label class="info__title" for="">Ghi chú</label>
+                                <input type="text" class="info__input flex-1" name="delivery_note" placeholder="Nhập ghi chú cho cửa hàng"
+                                    value="<?php echo $account['delivery_note'] ?>"
+                                    <?php echo $order['order_status'] == 0 ? '' : 'readonly' ?>>
+                                <?php if ($order['order_status'] == 0) { ?>
+                                    <i class="fas fa-pencil-alt fs-icon"></i>
+                                <?php } ?>
+                            </div>
+                            <div class="info__item d-flex">
+                                <label class="info__title" for="order_type">Phương thức:</label>
+                                <input type="text" class="info__input flex-1" name="order_type"
+                                    value="<?php echo format_order_type($account['order_type']) ?>" readonly>
+                            </div>
+                            <?php if ($order['order_status'] == 0) { ?>
+                                <div class="info__item d-flex justify-end">
+                                    <button type="submit" name="update_order" class="btn-update">Cập nhật thông tin</button>
+                                </div>
+                            <?php } ?>
+                        </form>
                     <?php
                     }
                     ?>
@@ -44,7 +165,7 @@ $order = mysqli_fetch_array(mysqli_query($mysqli, "SELECT * FROM orders WHERE  o
             </div>
             <div class="col" style="--w-md:4;">
                 <div class="checkout__cart" style="padding-block: 0;">
-                    <h2 class="h4" style="margin-bottom: 0;">Danh sách sản phẩm:</h2>
+                    <h2 class="h4" style="margin-bottom: 0;">Thông tin đơn hàng:</h2>
                     <div class="checkout__items">
                         <?php
                         $total = 0;

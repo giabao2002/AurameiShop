@@ -24,18 +24,22 @@ if (isset($_SESSION['account_id'])) {
                                     <div class="info__item d-flex">
                                         <label class="info__title" for="">Tên khách hàng:</label>
                                         <input type="text" class="info__input flex-1" name="delivery_name" value="<?php echo $account['customer_name'] ?>" required></input>
-                                    </div>
-                                    <div class="info__item d-flex">
-                                        <label class="info__title" for="">Địa chỉ:</label>
-                                        <input type="text" class="info__input flex-1" name="delivery_address" value="<?php echo $account['customer_address'] ?>" placeholder="Nhập vào địa chỉ nhận hàng" required></input>
+                                        <i class="fas fa-pencil-alt fs-icon"></i>
                                     </div>
                                     <div class="info__item d-flex">
                                         <label class="info__title" for="">Số điện thoại:</label>
                                         <input type="text" class="info__input flex-1" name="delivery_phone" value="<?php echo $account['customer_phone'] ?>" required></input>
+                                        <i class="fas fa-pencil-alt fs-icon"></i>
+                                    </div>
+                                    <div class="info__item d-flex">
+                                        <label class="info__title" for="">Địa chỉ:</label>
+                                        <input type="text" class="info__input flex-1" name="delivery_address" value="<?php echo $account['customer_address'] ?>" placeholder="Nhập vào địa chỉ nhận hàng" required></input>
+                                        <i class="fas fa-pencil-alt fs-icon"></i>
                                     </div>
                                     <div class="info__item d-flex">
                                         <label class="info__title" for="delivery_note">Ghi chú:</label>
                                         <input id="delivery_note" type="text" class="info__input flex-1" placeholder="Nhập ghi chú cho cửa hàng" name="delivery_note" value=""></input>
+                                        <i class="fas fa-pencil-alt fs-icon"></i>
                                     </div>
                                 <?php
                                 }
