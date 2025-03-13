@@ -80,7 +80,7 @@ $query_comment = mysqli_query($mysqli, $sql_comment);
         <div class="card">
             <div class="card-body">
                 <div class="main-pane-top d-flex space-between align-center">
-                    <h4 class="card-title" style="margin: 0;">Danh sách bình luận</h4>
+                    <h4 class="card-title" style="margin: 0;">Danh sách đánh giá</h4>
                     <div class="input__search p-relative">
                         <form class="search-form" action="#">
                             <i class="icon-search p-absolute"></i>
@@ -98,8 +98,8 @@ $query_comment = mysqli_query($mysqli, $sql_comment);
                                     <input type="checkbox" id="checkAll">
                                 </th>
                                 <th>Ngày đăng</th>
-                                <th>Người bình luận</th>
-                                <th>Nội dung bình luận</th>
+                                <th>Người đánh giá</th>
+                                <th>Nội dung đánh giá</th>
                                 <th>Trạng thái</th>
                             </tr>
                         </thead>
