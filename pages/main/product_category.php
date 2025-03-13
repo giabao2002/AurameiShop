@@ -1,9 +1,3 @@
-<!-- start product banner -->
-<?php
-include("./pages/base/product-banner.php");
-?>
-<!-- end product banner -->
-
 <!-- start product sort -->
 <?php
 include("./pages/base/product-sort.php");

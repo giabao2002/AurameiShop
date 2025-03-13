@@ -299,37 +299,65 @@ while ($row_product_detail = mysqli_fetch_array($query_product_detail)) {
                         </div>
                         <div class="customer-rating d-flex flex-column align-center justify-center">
                             <div class="avaluate__btn--title h5">Chia sẻ nhận xét về sản phẩm</div>
-                            <button class="btn btn__outline evaluate__btn">Viết nhận xét</button>
+                            <?php
+                            if (isset($_SESSION['account_id'])) {
+                                // Kiểm tra xem người dùng đã mua sản phẩm và đơn hàng đã hoàn thành chưa
+                                $account_id = $_SESSION['account_id'];
+                                $sql_check_purchase = "SELECT o.order_code 
+                                                     FROM orders o 
+                                                     JOIN order_detail od ON o.order_code = od.order_code 
+                                                     WHERE o.account_id = '$account_id' 
+                                                     AND od.product_id = '$product_id'
+                                                     AND o.order_status = 5";
+                                $can_review = mysqli_num_rows(mysqli_query($mysqli, $sql_check_purchase)) > 0;
+                                
+                                if ($can_review) {
+                                    echo '<button class="btn btn__outline evaluate__btn">Viết nhận xét</button>';
+                                } else {
+                                    echo '<div class="h6">Bạn cần mua và nhận sản phẩm thành công để đánh giá</div>';
+                                }
+                            } else {
+                                echo '<a class="btn btn__outline" href="index.php?page=login">Đăng nhập để đánh giá</a>';
+                            }
+                            ?>
                         </div>
                     </div>
 
                     <div class="comment-form">
+                        <?php
+                        $existing_review = null;
+                        if (isset($_SESSION['account_id'])) {
+                            $check_review = mysqli_query($mysqli, "SELECT * FROM evaluate WHERE account_id = '$account_id' AND product_id = '$product_id'");
+                            if(mysqli_num_rows($check_review) > 0) {
+                                $existing_review = mysqli_fetch_array($check_review);
+                            }
+                        }
+                        ?>
                         <form class="post-comment" method="POST" action="pages/handle/evaluate_rating.php?product_id=<?php echo $product_id; ?>">
                             <div class="product-rate d-flex align-center">
-                                <div class="rate-text"> Đánh giá</div>
+                                <div class="rate-text">Chọn số sao: </div>
                                 <div class="rate-box">
-                                    <input name="rate" type="radio" value="1">
-                                    <input name="rate" type="radio" value="2">
-                                    <input name="rate" type="radio" value="3">
-                                    <input name="rate" type="radio" value="4">
-                                    <input name="rate" type="radio" value="5" checked>
+                                    <?php for($i = 1; $i <= 5; $i++) { ?>
+                                        <input name="rate" type="radio" value="<?php echo $i ?>" 
+                                            <?php echo ($existing_review && $existing_review['evaluate_rate'] == $i) ? 'checked' : 
+                                                (!$existing_review && $i == 5 ? 'checked' : ''); ?>>
+                                    <?php } ?>
                                 </div>
-                                <div>cho sản phẩm này:</div>
                             </div>
-                            <label class="comment-label">Nhận xét (ý kiến sẽ thêm thông tin cho người khác mua hàng)</label>
                             <div class="form-element mg-t-20">
-                                <textarea class="form-control" name="evaluate_content" placeholder="Hãy cho chúng tôi biết đánh giá của bạn về sản phẩm này!"></textarea>
+                                <textarea class="form-control" name="evaluate_content" 
+                                    placeholder="Hãy cho chúng tôi biết đánh giá của bạn về sản phẩm này!"
+                                ><?php echo $existing_review ? $existing_review['evaluate_content'] : ''; ?></textarea>
                             </div>
                             <div class="d-flex align-center">
                                 <?php
                                 if (isset($_SESSION['account_id'])) {
-                                ?>
-                                    <button class="btn btn__solid mg-t-10" name="evaluate_add" type="submit">Gửi nhận xét</button>
-                                <?php
+                                    if ($can_review) {
+                                        echo '<button class="btn btn__solid mg-t-10" name="evaluate_add" type="submit">'.
+                                            ($existing_review ? 'Cập nhật đánh giá' : 'Gửi đánh giá').'</button>';
+                                    }
                                 } else {
-                                ?>
-                                    <a class="btn btn__solid mg-t-10" href="index.php?page=login">Đăng nhập để đánh giá</a>
-                                <?php
+                                    echo '<a class="btn btn__solid mg-t-10" href="index.php?page=login">Đăng nhập để đánh giá</a>';
                                 }
                                 ?>
                             </div>
