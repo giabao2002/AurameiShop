@@ -170,9 +170,9 @@ $query_product_edit = mysqli_query($mysqli, $sql_product_edit);
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>
+                                <!-- <th>
                                     <input type="checkbox" id="checkAll" title="Chọn tất cả">
-                                </th>
+                                </th> -->
                                 <th>Tên khách hàng</th>
                                 <th>Mức đánh giá</th>
                                 <th>Nội dung</th>
@@ -190,9 +190,9 @@ $query_product_edit = mysqli_query($mysqli, $sql_product_edit);
                             ?>
                                 <tr>
                                     <td>#<?php echo $i ?></td>
-                                    <td>
+                                    <!-- <td>
                                         <input type="checkbox" class="checkbox" onclick="testChecked(); getCheckedCheckboxes();" id="<?php echo $evaluate['evaluate_id'] ?>">
-                                    </td>
+                                    </td> -->
                                     <td><?php echo $evaluate['account_name'] ?></td>
                                     <td>
                                         <span class="review-star-list d-flex">
