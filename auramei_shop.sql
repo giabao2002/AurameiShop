@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 14, 2025 at 10:32 AM
--- Server version: 8.0.30
--- PHP Version: 8.2.26
+-- Generation Time: Mar 23, 2025 at 01:09 AM
+-- Server version: 8.4.3
+-- PHP Version: 8.3.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -483,6 +483,7 @@ ALTER TABLE `evaluate`
 --
 ALTER TABLE `inventory`
   ADD PRIMARY KEY (`inventory_id`),
+  ADD UNIQUE KEY `inventory_code` (`inventory_code`),
   ADD KEY `fk_inventory_account` (`account_id`),
   ADD KEY `idx_inventory_code` (`inventory_code`);
 
@@ -534,31 +535,31 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `account_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `account_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `article_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `article_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `brand_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `brand_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `capacity`
 --
 ALTER TABLE `capacity`
-  MODIFY `capacity_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `capacity_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -636,35 +637,6 @@ ALTER TABLE `evaluate`
 --
 ALTER TABLE `inventory`
   ADD CONSTRAINT `fk_inventory_account` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`);
-
---
--- Constraints for table `inventory_detail`
---
-ALTER TABLE `inventory_detail`
-  ADD CONSTRAINT `fk_inventory_detail_inventory_code` FOREIGN KEY (`inventory_code`) REFERENCES `inventory` (`inventory_code`),
-  ADD CONSTRAINT `fk_inventory_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `fk_orders_account` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`),
-  ADD CONSTRAINT `fk_orders_delivery` FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`delivery_id`);
-
---
--- Constraints for table `order_detail`
---
-ALTER TABLE `order_detail`
-  ADD CONSTRAINT `fk_order_detail_order_code` FOREIGN KEY (`order_code`) REFERENCES `orders` (`order_code`),
-  ADD CONSTRAINT `fk_order_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
-
---
--- Constraints for table `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `fk_product_brand` FOREIGN KEY (`product_brand`) REFERENCES `brand` (`brand_id`),
-  ADD CONSTRAINT `fk_product_capacity` FOREIGN KEY (`capacity_id`) REFERENCES `capacity` (`capacity_id`),
-  ADD CONSTRAINT `fk_product_category_id` FOREIGN KEY (`product_category`) REFERENCES `category` (`category_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
