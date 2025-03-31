@@ -36,15 +36,15 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="notificationDropdown">
                     <a class="dropdown-item py-3 border-bottom">
                         <p class="mb-0 font-weight-medium float-left">Bạn có 4 tin nhắn mới </p>
-                        <span class="badge badge-pill badge-primary float-right">View all</span>
+                        <span class="badge badge-pill badge-primary float-right">Xem tất cả</span>
                     </a>
                     <a class="dropdown-item preview-item py-3">
                         <div class="preview-thumbnail">
                             <i class="mdi mdi-alert m-auto text-primary"></i>
                         </div>
                         <div class="preview-item-content">
-                            <h6 class="preview-subject fw-normal text-dark mb-1">Application Error</h6>
-                            <p class="fw-light small-text mb-0"> Just now </p>
+                            <h6 class="preview-subject fw-normal text-dark mb-1">Lỗi ứng dụng</h6>
+                            <p class="fw-light small-text mb-0">Xem ngay</p>
                         </div>
                     </a>
                     <a class="dropdown-item preview-item py-3">
@@ -52,8 +52,8 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
                             <i class="mdi mdi-settings m-auto text-primary"></i>
                         </div>
                         <div class="preview-item-content">
-                            <h6 class="preview-subject fw-normal text-dark mb-1">Settings</h6>
-                            <p class="fw-light small-text mb-0"> Private message </p>
+                            <h6 class="preview-subject fw-normal text-dark mb-1">Cài đặt</h6>
+                            <p class="fw-light small-text mb-0">Tin nhắn riêng</p>
                         </div>
                     </a>
                     <a class="dropdown-item preview-item py-3">
@@ -61,8 +61,8 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
                             <i class="mdi mdi-airballoon m-auto text-primary"></i>
                         </div>
                         <div class="preview-item-content">
-                            <h6 class="preview-subject fw-normal text-dark mb-1">New user registration</h6>
-                            <p class="fw-light small-text mb-0"> 2 days ago </p>
+                            <h6 class="preview-subject fw-normal text-dark mb-1">Đăng ký người dùng mới</h6>
+                            <p class="fw-light small-text mb-0">2 ngày trước</p>
                         </div>
                     </a>
                 </div>
@@ -75,33 +75,33 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="countDropdown">
                     <a class="dropdown-item py-3">
                         <p class="mb-0 font-weight-medium float-left">Bạn có 3 thông báo mới </p>
-                        <span class="badge badge-pill badge-primary float-right">View all</span>
+                        <span class="badge badge-pill badge-primary float-right">Xem tất cả</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="images/faces/face10.jpg" alt="image" class="img-sm profile-pic">
+                            <img src="images/user.png" alt="image" class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
-                            <p class="preview-subject ellipsis font-weight-medium text-dark">Admin start</p>
+                            <p class="preview-subject ellipsis font-weight-medium text-dark">Admin</p>
                             <p class="fw-light small-text mb-0"> Có một đơn hàng cần phê duyệt </p>
                         </div>
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="images/faces/face12.jpg" alt="image" class="img-sm profile-pic">
+                            <img src="images/user.png" alt="image" class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
-                            <p class="preview-subject ellipsis font-weight-medium text-dark">Nguyễn Quân</p>
+                            <p class="preview-subject ellipsis font-weight-medium text-dark">Khách hàng 1</p>
                             <p class="fw-light small-text mb-0"> Yêu cầu hủy đơn hàng </p>
                         </div>
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="images/faces/face1.jpg" alt="image" class="img-sm profile-pic">
+                            <img src="images/user.png" alt="image" class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
-                            <p class="preview-subject ellipsis font-weight-medium text-dark">Thành An </p>
+                            <p class="preview-subject ellipsis font-weight-medium text-dark">Khách hàng 2</p>
                             <p class="fw-light small-text mb-0"> Đơn hàng đã được hoàn thành </p>
                         </div>
                     </a>

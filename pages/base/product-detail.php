@@ -162,7 +162,7 @@ while ($row_product_detail = mysqli_fetch_array($query_product_detail)) {
                                             </h3>
                                         </li>
                                         <li class="social__item opacity-50">
-                                            <a class="" href="#info-product">
+                                            <a class="" href="#">
                                                 <img class="svg__icon d-block" src="./assets/images/icon/facebook.svg" alt="" />
                                             </a>
                                         </li>
